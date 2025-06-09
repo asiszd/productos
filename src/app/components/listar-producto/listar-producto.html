@@ -1,0 +1,103 @@
+<div class="main-div">
+  <mat-card class="card-style">
+    <mat-card-header>
+      <mat-card-title class="mat">
+        <h2 style="text-align: center">Productos</h2>
+        <button style="margin-bottom: 5%" mat-button color="" (click)="crear()">
+          <mat-icon>add</mat-icon> Añadir producto
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Filtrar resultados</mat-label>
+        <input matInput (keyup)="filtroNombre($event)" #input />
+      </mat-form-field>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- ID -->
+          <ng-container matColumnDef="idProducto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{row.idProducto}}</td>
+          </ng-container>
+
+          <!-- NOMBRE -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let row">{{row.nombre}}</td>
+          </ng-container>
+
+          <!-- MARCA -->
+          <ng-container matColumnDef="marca">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
+            <td mat-cell *matCellDef="let row">{{row.marca}}</td>
+          </ng-container>
+
+          <!-- MODELO -->
+          <ng-container matColumnDef="modelo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
+            <td mat-cell *matCellDef="let row">{{row.modelo}}</td>
+          </ng-container>
+
+          <!-- PRECIO -->
+          <ng-container matColumnDef="precio">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+            <td mat-cell *matCellDef="let row">{{row.precio}}</td>
+          </ng-container>
+
+          <!-- STOCK -->
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock</th>
+            <td mat-cell *matCellDef="let row">{{row.stock}}</td>
+          </ng-container>
+
+          <!-- PROVEEDOR-->
+          <ng-container matColumnDef="proveedorId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Id Proveedor
+            </th>
+            <td mat-cell *matCellDef="let row">{{row.proveedorId}}</td>
+          </ng-container>
+
+          <!-- BOTONES DE EDITAR Y ELIMINAR-->
+          <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
+            <td mat-cell *matCellDef="let row">
+              <!-- EDITAR -->
+
+              <button matFab extended color="" (click)="editar(row)">
+                <mat-icon>edit</mat-icon> Editar
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="eliminar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Eliminar</th>
+            <td mat-cell *matCellDef="let row">
+              <!-- ELIMINAR -->
+              <button matFab extended color="warn" (click)="eliminar(row)">
+                <mat-icon>delete</mat-icon> Eliminar
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              No hay productos que coincidan con "{{input.value}}"
+            </td>
+          </tr>
+        </table>
+
+        <mat-paginator
+          [length]="productos.length"
+          [pageSize]="5"
+          aria-label="Selecciona la página"
+        ></mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

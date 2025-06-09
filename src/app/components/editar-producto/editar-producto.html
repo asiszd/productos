@@ -1,0 +1,156 @@
+<div class="main-div">
+  <mat-card class="card-style">
+    <mat-card-header>
+      <mat-card-title class="mat">
+        <h2 style="text-align: center">Crear producto</h2>
+        <button
+          style="margin-bottom: 5%"
+          mat-button
+          color=""
+          (click)="regresar()"
+        >
+          <mat-icon> keyboard_backspace </mat-icon> Regresar a lista
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- INICIA FORMULARIO DE CREACIÓN DE USUARIO -->
+      <form
+        ngNativeValidate
+        (ngSubmit)="actualizar()"
+        #form="ngForm"
+        class="example-form"
+      >
+        <mat-card class="contenedor-interno">
+          <mat-card-content>
+            <div class="container">
+              <mat-form-field class="example-full-width">
+                <mat-label for="idPedido">NOMBRE DEL PRODUCTO</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  class="form-control"
+                  name="nombre"
+                  placeholder="Ingresa el nombre del producto"
+                  [(ngModel)]="producto.nombre"
+                  required=""
+                  #nombre="ngModel"
+                />
+                <div *ngIf="nombre.invalid && nombre.touched">
+                  <small style="color: red"
+                    >El campo NOMBRE es obligatorio.</small
+                  >
+                </div>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label for="total">MARCA</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  name="marca"
+                  class="form-control"
+                  placeholder="Ingresa la MARCA"
+                  [(ngModel)]="producto.marca"
+                  required=""
+                  #marca="ngModel"
+                />
+                <div *ngIf="marca.invalid && marca.touched">
+                  <small style="color: red"
+                    >El campo MARCA es obligatorio.</small
+                  >
+                </div>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label for="total">MODELO</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  name="modelo"
+                  class="form-control"
+                  placeholder="Ingresa el MODELO"
+                  [(ngModel)]="producto.modelo"
+                  required=""
+                  #modelo="ngModel"
+                />
+                <div *ngIf="modelo.invalid && modelo.touched">
+                  <small style="color: red"
+                    >El campo MODELO es obligatorio.</small
+                  >
+                </div>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label for="total">PRECIO</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  step="any"
+                  name="precio"
+                  class="form-control"
+                  placeholder="Ingresa el PRECIO"
+                  (keydown)="validaDouble($event)"
+                  [(ngModel)]="producto.precio"
+                  required=""
+                  #precio="ngModel"
+                />
+                <div *ngIf="precio.invalid && precio.touched">
+                  <small style="color: red"
+                    >El campo PRECIO es obligatorio y debe ser válido.</small
+                  >
+                </div>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label for="status">STOCK</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  name="stock"
+                  class="form-control"
+                  placeholder="Ingresa el STOCK"
+                  (keydown)="validaNumeros($event)"
+                  [(ngModel)]="producto.stock"
+                  required=""
+                  #stock="ngModel"
+                />
+                <div *ngIf="stock.invalid && stock.touched">
+                  <small style="color: red"
+                    >El campo STOCK es obligatorio.</small
+                  >
+                </div>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label for="status">ID DEL PROVEEDOR</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  name="proveedorId"
+                  class="form-control"
+                  placeholder="Ingresa el ID DEL PROVEEDOR"
+                  (keydown)="validaNumeros($event)"
+                  [(ngModel)]="producto.proveedorId"
+                  required=""
+                  #proveedorId="ngModel"
+                />
+                <div *ngIf="proveedorId.invalid && proveedorId.touched">
+                  <small style="color: red"
+                    >El campo ID DEL PROVEEDOR es obligatorio.</small
+                  >
+                </div>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+          <mat-card-actions style="display: flex; justify-content: center">
+            <button matFab extended color="warn">
+              <mat-icon>save</mat-icon> ACTUALIZAR
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+      <!-- FINALIZA FORMULARIO DE CREACIÓN DE USUARIO -->
+    </mat-card-content>
+  </mat-card>
+</div>
