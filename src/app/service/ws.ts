@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Producto } from '../../Entidad/Producto';
 
@@ -7,7 +7,6 @@ import { Producto } from '../../Entidad/Producto';
 })
 export class Ws {
   constructor(private http: HttpClient) {}
-
   urlProducto = 'http://localhost:9000/producto';
 
   // CRUD DE PRODUCTO
@@ -30,10 +29,6 @@ export class Ws {
   }
 
   buscarProducto(producto: Producto) {
-    /*const params = new HttpParams().append(
-      'idProducto',
-      producto.idProducto.toString()
-    );*/
     return this.http.post<Producto>(this.urlProducto + '/buscar', producto);
   }
 }
