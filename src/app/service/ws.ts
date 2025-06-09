@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Producto } from '../../Entidad/Producto';
+import { Compra } from '../../Entidad/Compra';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ import { Producto } from '../../Entidad/Producto';
 export class Ws {
   constructor(private http: HttpClient) {}
   urlProducto = 'http://localhost:9000/producto';
+  urlCompras = 'http://localhost:9000/compra';
 
   // CRUD DE PRODUCTO
   listarProducto() {
@@ -30,5 +32,11 @@ export class Ws {
 
   buscarProducto(producto: Producto) {
     return this.http.post<Producto>(this.urlProducto + '/buscar', producto);
+  }
+
+  //COMPRAS
+
+  listarComprasProd(producto: any) {
+    return this.http.get<Compra[]>(this.urlCompras + '/producto/' + producto);
   }
 }

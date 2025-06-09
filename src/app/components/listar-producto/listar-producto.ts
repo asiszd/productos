@@ -17,6 +17,8 @@ import {
   MatCardHeader,
   MatCardTitle,
 } from '@angular/material/card';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { HistorialCompras } from '../historial-compras/historial-compras';
 
 @Component({
   selector: 'app-listar-producto',
@@ -34,6 +36,9 @@ import {
     MatCardTitle,
     MatButton,
     MatCardContent,
+    CurrencyPipe,
+    HistorialCompras,
+    CommonModule,
   ],
   templateUrl: './listar-producto.html',
   styleUrl: './listar-producto.css',
@@ -49,11 +54,13 @@ export class ListarProducto implements AfterViewInit {
     'proveedorId',
     'editar',
     'eliminar',
+    'compras',
   ];
   productos: Producto[] = [];
   dataSource!: MatTableDataSource<Producto>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  isModalOpen = false;
 
   constructor(private service: Ws, private router: Router) {}
 
@@ -85,6 +92,15 @@ export class ListarProducto implements AfterViewInit {
 
   crear() {
     this.router.navigate(['crear']);
+  }
+
+  openModal(producto: Producto) {
+    localStorage.setItem('productoId', producto.idProducto.toString());
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 
   eliminar(producto: Producto) {

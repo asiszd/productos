@@ -42,8 +42,9 @@
           <!-- PRECIO -->
           <ng-container matColumnDef="precio">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
-            <td mat-cell *matCellDef="let row">{{row.precio}}</td>
-          </ng-container>
+            <td mat-cell *matCellDef="let row">{{row.precio | currency }}</td>
+            <td></td
+          ></ng-container>
 
           <!-- STOCK -->
           <ng-container matColumnDef="stock">
@@ -81,6 +82,16 @@
             </td>
           </ng-container>
 
+          <ng-container matColumnDef="compras">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Compras</th>
+            <td mat-cell *matCellDef="let row">
+              <!-- ELIMINAR -->
+              <button matFab extended color="primary" (click)="openModal(row)">
+                <mat-icon>receipt</mat-icon> Compras
+              </button>
+            </td>
+          </ng-container>
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
@@ -94,10 +105,15 @@
 
         <mat-paginator
           [length]="productos.length"
-          [pageSize]="5"
+          [pageSizeOptions]="[5,10]"
           aria-label="Selecciona la página"
         ></mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>
 </div>
+
+<app-historial-compras
+  *ngIf="isModalOpen"
+  (close)="closeModal()"
+></app-historial-compras>
